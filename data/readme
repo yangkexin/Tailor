@@ -1,0 +1,2 @@
+#### useage
+python process_data_gpt2.py --dataset yelp_sentiment --save_path yelp_sentiment_gpt2/
