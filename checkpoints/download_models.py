@@ -17,3 +17,11 @@ roberta.save_pretrained("roberta-large-2")
 roberta=AutoModelForSequenceClassification.from_pretrained("roberta-large", num_labels=3)
 print(roberta)
 roberta.save_pretrained("roberta-large-3")
+
+
+
+#for grammar eval
+tokenizer = AutoTokenizer.from_pretrained("textattack/roberta-base-CoLA")
+model = AutoModelForSequenceClassification.from_pretrained("textattack/roberta-base-CoLA")
+tokenizer.save_pretrained("roberta-base-CoLA")
+model.save_pretrained("roberta-base-CoLA")
