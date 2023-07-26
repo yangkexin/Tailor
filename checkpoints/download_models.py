@@ -1,6 +1,6 @@
 from transformers import TrainingArguments, GPT2LMHeadModel, GPT2TokenizerFast, GPT2Config, Trainer, GPT2Model, AutoTokenizer,AutoModelForSequenceClassification
 #for prompts
-models = ['gpt2']
+models = ['gpt2','gpt2-medium', 'gpt2-large']
 for name in models:
     model = GPT2Model.from_pretrained(name)  
     tokenizer = AutoTokenizer.from_pretrained(name)
