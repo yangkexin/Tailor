@@ -27,7 +27,7 @@ def tokenize_yelp_sentiment(dataset):
 
 
 def process_yelp_food(save_path):
-    dataset = load_dataset("yelp_food/yelp_classifier_3type.py",
+    dataset = load_dataset("yelp_food/yelp_classifier.py",
     data_files="yelp_food/")
     dataset = tokenize_yelp_food(dataset)
     dataset.save_to_disk(save_path)
