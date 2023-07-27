@@ -1,6 +1,6 @@
 # Tailor
 ### Step 0 Installation
-See 
+See requirements.txt
 
 ### Step 1 Download pre-trained models
 
