@@ -11,6 +11,8 @@ python checkpoints/download_models.py
 
 ### Step 2 Process dataset
 
+See readme.md in the data folder
+
 ### Step 3 Train the single prompts
 
 ### Step 4 Train the attribute classifiers
