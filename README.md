@@ -1,4 +1,7 @@
 # Tailor
+### Step 0 Installation
+See 
+
 ### Step 1 Download pre-trained models
 
 ### Step 2 Process dataset
