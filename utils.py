@@ -41,3 +41,22 @@ def create_prompts(tokenizer_name, control_code=None, generate_eval=False):
         prompts_tensors.append(tokenizer(prompt, return_tensors='pt').input_ids)
 
     return prompts_tensors, prompts
+
+def post_process_sent(sent, model, prompt=None):
+    # post process generated text, keep the completed sentences
+    sent = ''.join(reversed(sent))
+    index = sent.find('.')
+    if index > 0:
+        sent = sent[index:]
+    sent = ''.join(reversed(sent))
+    if prompt is not None:
+        sent = prompt + ' ' + sent
+    return sent
+
+
+def post_process_sents(sents, model='gpt2', prompt=None):
+    # post process generated text, keep the completed sentences
+    processed_sents = []
+    for sent in sents:
+        processed_sents.append(post_process_sent(sent, model, prompt))
+    return processed_sents
