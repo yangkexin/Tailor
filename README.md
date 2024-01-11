@@ -32,7 +32,7 @@ python checkpoints/download_models.py
 &emsp;&emsp;To facilitate the concatenation of single-attribute prompts, we first extract the single-attribute prompt from the checkpoint file obtained in Step 3. To do this, you need to:
 - Slightly change the "get_model(args)" function in main_prefix_gpt2.py. That is, removing the comment signal before the last piece of code.
 - After that, use get_food_prompt.sh/get_sentiment_prompt.sh to extract and save them as files like xxx.pkl.
-- Merge the files in step 2.
+- Merge the files in step 2 by merge_prompts.py
 
 
    
