@@ -13,7 +13,7 @@ python checkpoints/download_models.py
 
 &emsp;&emsp;See readme.md in the data folder
 
-### Step 3 Train the single-attribute prompts/classifier
+### Step 3 Training the single-attribute prompts/classifier
 #### 1. Single-attribute prompts training
 &emsp;&emsp;Using train_single_attribute_prompt_sentiment.sh/train_single_attribute_prompt_topic.sh
 #### 2. Single-attribute classifier training
@@ -28,5 +28,18 @@ python checkpoints/download_models.py
 &emsp;&emsp;As we mentioned in the paper, each single attribute data sample needs to be labeled again, such as the food single attribute text will get the annotation about the sentiment attribute. Here, we use the attribute classifier trained in the previous step to score the single attribute training data:
    - Before starting the annotation, remove the attribute labels for each line in the training dataset file (i.e., each line of the annotation file is a sentence, not a label + space + sentence). Save the file as "train_yelp_sentiment_prompt_without_label.txt" and "train_yelp_food_prompt_without_label.txt".
    - After that, we annotate the above two files separately using label_food_data.sh/label_sentiment_data.sh
-   
+#### 2. Extract single-attribute prompt to form a dictionary
+&emsp;&emsp;To facilitate the concatenation of single-attribute prompts, we first extract the single-attribute prompt from the checkpoint file obtained in Step 3. To do this, you first need to make a slight change to the "get_model(args)" function in main_prefix_gpt2.py. That is, removing the comment signal before the last piece of code:
+>def get_model(args):
+    prefix_model_path, base_model_name, num_token_of_prefix, init_prefix = args.prefix_model_path, args.base_model_name, args.num_token_of_prefix, args.init_prefix
+>   ......
+>#save single attribute prompts
+    import pickle as pkl
+    path="/".join(args.weight_path.split("/")[:2])
+    if not os.path.isdir(path):
+         os.makedirs(path)
+    pkl.dump(model.prefix_embed.weight.data,open(args.weight_path,"wb"))
+    exit()
+    return model
+
    
