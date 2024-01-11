@@ -31,15 +31,18 @@ python checkpoints/download_models.py
 #### 2. Extract single-attribute prompt to form a dictionary
 &emsp;&emsp;To facilitate the concatenation of single-attribute prompts, we first extract the single-attribute prompt from the checkpoint file obtained in Step 3. To do this, you first need to make a slight change to the "get_model(args)" function in main_prefix_gpt2.py. That is, removing the comment signal before the last piece of code:
 >def get_model(args):
-    prefix_model_path, base_model_name, num_token_of_prefix, init_prefix = args.prefix_model_path, args.base_model_name, args.num_token_of_prefix, args.init_prefix
+>
+>    prefix_model_path, base_model_name, num_token_of_prefix, init_prefix = args.prefix_model_path, args.base_model_name, args.num_token_of_prefix, args.init_prefix
+    
 >   ......
->#save single attribute prompts
-    import pickle as pkl
-    path="/".join(args.weight_path.split("/")[:2])
-    if not os.path.isdir(path):
-         os.makedirs(path)
-    pkl.dump(model.prefix_embed.weight.data,open(args.weight_path,"wb"))
-    exit()
-    return model
+> 
+>   #save single attribute prompts
+>    import pickle as pkl
+>    path="/".join(args.weight_path.split("/")[:2])
+>    if not os.path.isdir(path):
+>       os.makedirs(path)
+>    pkl.dump(model.prefix_embed.weight.data,open(args.weight_path,"wb"))
+>    exit()
+>    return model
 
    
