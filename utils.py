@@ -60,3 +60,28 @@ def post_process_sents(sents, model='gpt2', prompt=None):
     for sent in sents:
         processed_sents.append(post_process_sent(sent, model, prompt))
     return processed_sents
+
+def create_cla_dataset_from_txt(txt, task, tokenizer):
+    assert txt is not None
+    dataset = load_dataset('text.py', data_files={'test': txt})
+    # max_eval_length = project_config.MAX_SST_LENGTH if task == 'sst' else project_config.MAX_AG_LENGTH
+    max_eval_length = project_config.MAX_LENGTH
+    dataset = dataset.map(lambda e: tokenizer(e['text'], truncation=True, max_length=max_eval_length,
+                                              padding='max_length'), batched=True)
+    return dataset['test']
+
+def get_sorted_index(txt):
+    if 'negative' in txt:
+        return 0
+    if 'positive' in txt:
+        return 1
+    if 'world' in txt:
+        return 0
+    if 'sports' in txt:
+        return 1
+    if 'business' in txt:
+        return 2
+    if 'sci' in txt:
+        return 3
+    return 0
+
